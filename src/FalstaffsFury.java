@@ -3,16 +3,19 @@ import java.util.Scanner;
 public class FalstaffsFury {
     Scanner input = new Scanner(System.in);
 
+    // Intro
     public static String greeting(String name) {
         return "Greetings " + name;
     }
 
+    // Delegate Stats
     public static int health(int statpts) {
         int avail = statpts - 2;
         System.out.println("How many stat points for your HEALTH");
         return getInteger(1, avail);
     }
 
+    // Attack
     public static int attack(int statpts) {
         int avail = statpts - 1;
         System.out.printf("\nYou have %d stat points remaining\n", statpts);
@@ -20,6 +23,7 @@ public class FalstaffsFury {
         return getInteger(1, avail);
     }
 
+    // Continue Question
     public static String go() {
         Scanner input = new Scanner(System.in);
 //        System.out.println("Would you like to continue? (y/n)");
@@ -32,6 +36,7 @@ public class FalstaffsFury {
         }
     }
 
+    // Get Integer Method
     public static int getInteger(int x, int y) {
         Scanner input = new Scanner(System.in);
         System.out.printf("Please enter a number between %d and %d:", x, y);
@@ -42,6 +47,7 @@ public class FalstaffsFury {
         return numInput;
     }
 
+    // Choose Difficulty
     public static int difficulty() {
         Scanner input = new Scanner(System.in);
         System.out.println("Easy, Medium, or High Difficulty?: (e/m/h)");
@@ -59,6 +65,7 @@ public class FalstaffsFury {
         return points;
     }
 
+    // Potions Determined by Game Difficulty
     public static int potions(int x) {
 
         if (x == 60) {
@@ -70,6 +77,7 @@ public class FalstaffsFury {
         }
     }
 
+    // Delegate Stats
     public static String attr(int points) {
         System.out.printf("\nYou have %d stat points.\n\nEach attribute must have 1pt.\n\nPlease use them wisely.\n\n", points);
         int hlth = health(points);
@@ -83,6 +91,7 @@ public class FalstaffsFury {
         return output;
     }
 
+    // Enemy Stats-- Randomly Generated Based on Difficulty
     public static String enemy(int difficulty) {
         int eStats = 0;
         if (difficulty == 60) {
@@ -102,10 +111,12 @@ public class FalstaffsFury {
         return hlth + " " + attk + " " + def;
     }
 
+    // Roll Dice Method
     public static int rollDice() {
         return (int) (Math.random() * 12) + 1;
     }
 
+    // Defend
     public static int defense(int hero, int enemy) {
         int rollOne = rollDice();
         int rollTwo = rollDice();
@@ -121,6 +132,7 @@ public class FalstaffsFury {
         }
     }
 
+    // Attack
     public static int attack(int hero, int enemy) {
         int rollOne = rollDice();
         int rollTwo = rollDice();
@@ -137,11 +149,13 @@ public class FalstaffsFury {
     }
 
 
+    // Main Method
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
         String response, attributes, eAttributes;
 
+        // Loop Containing Quest
         do {
             int hlth, att, def, eHlth, eAtt, eDef;
 
@@ -207,6 +221,7 @@ public class FalstaffsFury {
             eDef = eIntegers[2];
 
 
+            // First Fight
             do {
                 System.out.println("What do you do? ('y' = ATTACK/ 'n' = DEFEND)");
                 response = go();
