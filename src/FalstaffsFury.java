@@ -142,10 +142,22 @@ public class FalstaffsFury {
         int def = enemy * rollTwo / 9;
 
         if (def - att > 0) {
+            System.out.println("Your attack missed and dealt 0 damage.");
             return 0;
         } else {
+            System.out.printf("You struck you enemy dealing %d damage.",def-att);
             return def - att;
         }
+    }
+
+    public static void lifebar(int life){
+        String output = "*-----------------------------------------------------------------*\n| Health: ";
+        for (int i = 0; i <= life;i+=2){
+            output += "▒";
+        }
+        output += "%-30s";
+        output += ("\n*-----------------------------------------------------------------*\n");
+        System.out.printf(output,"|");
     }
 
 
@@ -233,8 +245,10 @@ public class FalstaffsFury {
 
                     hlth += deduction;
 
-                    System.out.println("\nStats:" + hlth + " | " + att + " | " + def);
-                    System.out.println("Enemy Stats:" + eHlth + " | " + eAtt + " | " + eDef +"\n");
+//                    System.out.println("\nStats:" + hlth + " | " + att + " | " + def);
+//                    System.out.println("Enemy Stats:" + eHlth + " | " + eAtt + " | " + eDef +"\n");
+                    System.out.println("Hero");
+                    lifebar(hlth);
 
                     System.out.println("\nYou counter!\n");
 
@@ -242,8 +256,10 @@ public class FalstaffsFury {
 
                     eHlth += deduction;
 
-                    System.out.println("\nStats:" + hlth + " | " + att + " | " + def);
-                    System.out.println("Enemy Stats:" + eHlth + " | " + eAtt + " | " + eDef);
+//                    System.out.println("\nStats:" + hlth + " | " + att + " | " + def);
+//                    System.out.println("Enemy Stats:" + eHlth + " | " + eAtt + " | " + eDef);
+                    System.out.println("Enemy");
+                    lifebar(eHlth);
 
                 } else {
                     System.out.println("You slash with your sword.");
@@ -252,17 +268,21 @@ public class FalstaffsFury {
 
                     eHlth += deduction;
 
-                    System.out.println("\nStats:" + hlth + " | " + att + " | " + def);
-                    System.out.println("Enemy Stats:" + eHlth + " | " + eAtt + " | " + eDef);
+//                    System.out.println("\nStats:" + hlth + " | " + att + " | " + def);
+//                    System.out.println("Enemy Stats:" + eHlth + " | " + eAtt + " | " + eDef +"\n");
+                    System.out.println("Enemy");
+                    lifebar(eHlth);
 
                     System.out.println("\nYour enemy counters!\n");
 
-                    deduction = defense(eAtt,def);
+                    deduction = defense(att,eDef);
 
                     hlth += deduction;
 
-                    System.out.println("\nStats:" + hlth + " | " + att + " | " + def);
-                    System.out.println("Enemy Stats:" + eHlth + " | " + eAtt + " | " + eDef);
+//                    System.out.println("\nStats:" + hlth + " | " + att + " | " + def);
+//                    System.out.println("Enemy Stats:" + eHlth + " | " + eAtt + " | " + eDef);
+                    System.out.println("Hero");
+                    lifebar(hlth);
                 }
             } while (eHlth > 0 && hlth > 0);
 
