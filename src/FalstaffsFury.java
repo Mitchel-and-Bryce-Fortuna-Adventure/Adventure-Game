@@ -95,9 +95,9 @@ public class FalstaffsFury {
     public static String enemy(int difficulty) {
         int eStats = 0;
         if (difficulty == 60) {
-            eStats = difficulty / 2;
+            eStats = (int) (difficulty / 1.25);
         } else if (difficulty == 30) {
-            eStats = difficulty * 2;
+            eStats = (int) (difficulty * 1.5);
         } else if (difficulty == 45) {
             eStats = difficulty;
         }
@@ -107,7 +107,7 @@ public class FalstaffsFury {
         int attk = (int) (Math.random() * (eStats - 1)) + 1;
         eStats -= attk;
         int def = eStats;
-        System.out.printf("\"Enemy HLTH: %d, ATTK: %d, DEF: %d\n", hlth, attk, def);
+        System.out.printf("\nEnemy HLTH: %d, ATTK: %d, DEF: %d\n", hlth, attk, def);
         return hlth + " " + attk + " " + def;
     }
 
@@ -122,8 +122,8 @@ public class FalstaffsFury {
         int rollTwo = rollDice();
 
         System.out.printf("\nYou rolled a %d, your enemy rolled a %d\n\n", rollOne, rollTwo);
-        int att = enemy * rollOne / 6;
-        int def = hero * rollTwo / 4;
+        int att = enemy * rollOne / 9;
+        int def = hero * rollTwo / 9;
 
         if (def - att > 0) {
             return 0;
@@ -138,8 +138,8 @@ public class FalstaffsFury {
         int rollTwo = rollDice();
 
         System.out.printf("\nYou rolled a %d, your enemy rolled a %d\n", rollOne, rollTwo);
-        int att = hero * rollOne / 6;
-        int def = enemy * rollTwo /6;
+        int att = hero * rollOne / 9;
+        int def = enemy * rollTwo / 9;
 
         if (def - att > 0) {
             return 0;
@@ -168,7 +168,7 @@ public class FalstaffsFury {
                 System.out.println("\nHello! My name is Falstaff.\n\nWhat is your name traveler?:");
                 String name = input.nextLine();
 
-                System.out.println(greeting(name) + "\n\nGallidor needs help to defeat the evil forces of Covid 19.");
+                System.out.println(greeting(name) + "\n\nGallidor needs help to defeat the evil forces of Covidor.");
                 System.out.println("Continue");
                 response = go();
             }
@@ -191,7 +191,7 @@ public class FalstaffsFury {
             hlth = integers[0];
             att = integers[1];
             def = integers[2];
-
+            System.out.println("\nContinue?");
             response = go();
 
             if (response.equalsIgnoreCase("n")) {
@@ -233,9 +233,17 @@ public class FalstaffsFury {
 
                     hlth += deduction;
 
-                    System.out.println("Stats:" + hlth + " | " + att + " | " + def);
-                    System.out.println("Enemy Stats:" + eHlth + " | " + eAtt + " | " + eDef);
+                    System.out.println("\nStats:" + hlth + " | " + att + " | " + def);
+                    System.out.println("Enemy Stats:" + eHlth + " | " + eAtt + " | " + eDef +"\n");
 
+                    System.out.println("\nYou counter!\n");
+
+                    deduction = attack(att,eDef);
+
+                    eHlth += deduction;
+
+                    System.out.println("\nStats:" + hlth + " | " + att + " | " + def);
+                    System.out.println("Enemy Stats:" + eHlth + " | " + eAtt + " | " + eDef);
 
                 } else {
                     System.out.println("You slash with your sword.");
@@ -244,12 +252,28 @@ public class FalstaffsFury {
 
                     eHlth += deduction;
 
-                    System.out.println("Stats:" + hlth + " | " + att + " | " + def);
+                    System.out.println("\nStats:" + hlth + " | " + att + " | " + def);
+                    System.out.println("Enemy Stats:" + eHlth + " | " + eAtt + " | " + eDef);
+
+                    System.out.println("\nYour enemy counters!\n");
+
+                    deduction = defense(eAtt,def);
+
+                    hlth += deduction;
+
+                    System.out.println("\nStats:" + hlth + " | " + att + " | " + def);
                     System.out.println("Enemy Stats:" + eHlth + " | " + eAtt + " | " + eDef);
                 }
-            } while (eHlth > 0);
+            } while (eHlth > 0 && hlth > 0);
+
+            if (eHlth <= 0) {
+                System.out.println("\nCongratulations Hero you defeated the minions of Covidor\n\nThank you for your help!\n");
+            } else {
+                System.out.println("\nYou are a victim of the EVIL Covidians, your will be mourned...\nBut ultimately forgotten...");
+            }
 
             System.out.println("Continue?");
+            response=go();
 
         } while (response.equalsIgnoreCase("y"));
 
